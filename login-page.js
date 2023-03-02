@@ -1,24 +1,25 @@
 var form = document.querySelector('#form_id');
 var login = document.querySelector('#email');
 var password = document.querySelector('#password');
+var phone = document.querySelector('#phone');
 
 var loginError = document.querySelector('#login-error');
 var passwordError = document.querySelector('#password-error');
-
+var phoneError = document.querySelector('#phone-error');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
     loginError.innerHTML = '';
     passwordError.innerHTML = '';
-   
+    phoneError.innerHTML = '';
 
     var loginValue = login.value;
     var passwordValue = password.value;
-  
+    var phoneValue = phone.value;
     var loginErr = '';
     var passwordErr = '';
-    
+    var phoneErr = '';
 
     if (!(/\S+@[a-z]+.[a-z]+/g.test(loginValue))) {
         loginErr = 'Введите корректный логин (e-mail)';
@@ -32,10 +33,13 @@ form.addEventListener('submit', (event) => {
         passwordErr = 'Пароль должен быть длиннее 6 символов';
     }
 
+    if (!(/(\+7|8)[\s(]*\d{3}[)\s]*\d{3}[\s-]?\d{2}[\s-]?\d{2}/.test(phoneValue))) {
+        phoneErr = 'Неправильный номер телефона';
+    }
 
     loginError.innerHTML = loginErr;
     passwordError.innerHTML = passwordErr;
-    
+    phoneError.innerHTML = phoneErr;
 
     if (loginErr.length === 0 && passwordErr.length === 0 && phoneErr.length === 0) {
         alert('Успешный вход');
